@@ -47,11 +47,64 @@ s32 D_80B044A8[] = { 0x06000039, 0x10010000, 0x00000000, 0x00000000, 0x00000000,
 s32 D_80B044D4[] = { 0x00000000, 0xFFCFFFFF, 0x00040000, 0x00000000, 0x00000000,
                      0x01000100, 0x01000000, 0xFF100000, 0x001C0064 };
 s32 D_80B044F8[] = { 0x06110039, 0x10000000, 0x00000001, D_80B044D4 };
-s32 D_80B04508[] = { 0x00000000, 0x00000000, 0x00000000 };
-s32 D_80B04514[] = { 0xFFFFFF4B };
-s32 D_80B04518[] = { 0xFFFFFF4B };
-s32 D_80B0451C[] = { 0xFFFFFF00 };
-s32 D_80B04520[] = { 0xFFFFFF00 };
+
+void func_80B02270(EnSsh *this, EnSshActionFunc actionFunc) {
+    this->actionFunc = actionFunc;
+}
+
+void func_80B02278(EnSsh *this, GlobalContext *globalCtx) {
+    Vec3f velocity = {0.0f, 0.0f,0.0f};
+    Vec3f pos;
+ 
+    pos.x = this->actor.posRot.pos.x;
+    pos.y = this->actor.groundY;
+    pos.z = this->actor.posRot.pos.z;
+ 
+    func_80028F84(globalCtx, &pos, &velocity, &velocity, 0x64, 0xDC, 8);
+}
+
+//#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Ssh/func_80B02300.s")
+
+s32 func_80B02300(GlobalContext *globalCtx) {
+    EffectBlureInit1 attackEffect;
+    
+                            //r  g   b    a
+    Color_RGBA8_n sp34 = { 255, 255, 255, 75 };
+    Color_RGBA8_n sp30 = { 255, 255, 255, 75 };
+    Color_RGBA8_n sp2C = { 255, 255, 255, 0 }; 
+    Color_RGBA8_n sp28 = { 255, 255, 255, 0 };
+    
+    s16 sp20;
+
+    
+    attackEffect.p1StartColor.r = sp34.r;
+    attackEffect.p2StartColor.r = sp30.r;
+    attackEffect.p1EndColor.r = sp2C.r;
+    attackEffect.p2EndColor.r = sp28.r;
+    
+    attackEffect.p2StartColor.b = sp30.b;
+    attackEffect.p1EndColor.b = sp2C.b;
+    attackEffect.p2EndColor.b = sp28.b;
+    attackEffect.p1StartColor.b = sp34.b;
+    
+    attackEffect.p1StartColor.g = sp34.g;
+    attackEffect.p2StartColor.g = sp30.g;
+    attackEffect.p1EndColor.g = sp2C.g;
+    attackEffect.p2EndColor.g = sp28.g;
+
+    attackEffect.p1StartColor.a = sp34.a;
+    attackEffect.p2StartColor.a = sp30.a;
+    attackEffect.p1EndColor.a = sp2C.a;
+    attackEffect.p2EndColor.a = sp28.a;
+
+    attackEffect.elemDuration = 6;
+    attackEffect.unkFlag = 0;
+    attackEffect.calcMode = 3;
+    
+    Effect_Add(globalCtx, &sp20, EFFECT_BLURE1, 0, 0, &attackEffect);
+    return sp20;
+}
+
 s32 D_80B04524[] = { 0x44508000, 0x44508000, 0x00000000 };
 s32 D_80B04530[] = { 0x44508000, 0xC4120000, 0x00000000 };
 s32 D_80B0453C[] = { D_80B04470, D_80B04470, D_80B04470, D_80B044A8, D_80B044A8, D_80B044A8 };
@@ -61,12 +114,6 @@ s32 D_80B0458C[] = { 0x03030103, 0x01010100 };
 s32 D_80B04594[] = { 0x42200000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
                      0x00000000, 0xC2200000, 0x00000000, 0x00000000 };
 s32 D_80B045B8[] = { 0x060007E0, 0x06000C60, 0x06001060, 0x00000000, 0x00000000, 0x00000000 };
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Ssh/func_80B02270.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Ssh/func_80B02278.s")
-
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Ssh/func_80B02300.s")
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_En_Ssh/func_80B023FC.s")
 
