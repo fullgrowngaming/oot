@@ -1434,8 +1434,11 @@ endseg
 beginseg
     name "ovl_Bg_Ydan_Maruta"
     include "build/src/overlays/actors/ovl_Bg_Ydan_Maruta/z_bg_ydan_maruta.o"
-    include "build/data/overlays/actors/z_bg_ydan_maruta.data.o"
+#ifdef NON_MATCHING
+    include "build/src/overlays/actors/ovl_Bg_Ydan_Maruta/ovl_Bg_Ydan_Maruta_reloc.o"
+#else
     include "build/data/overlays/actors/z_bg_ydan_maruta.reloc.o"
+#endif
 endseg
 
 beginseg
@@ -2597,11 +2600,7 @@ endseg
 beginseg
     name "ovl_En_Horse_Ganon"
     include "build/src/overlays/actors/ovl_En_Horse_Ganon/z_en_horse_ganon.o"
-#ifdef NON_MATCHING
     include "build/src/overlays/actors/ovl_En_Horse_Ganon/ovl_En_Horse_Ganon_reloc.o"
-#else
-    include "build/data/overlays/actors/z_en_horse_ganon.reloc.o"
-#endif
 endseg
 
 beginseg
@@ -3409,11 +3408,7 @@ endseg
 beginseg
     name "ovl_En_Zl2"
     include "build/src/overlays/actors/ovl_En_Zl2/z_en_zl2.o"
-#ifdef NON_MATCHING
     include "build/src/overlays/actors/ovl_En_Zl2/ovl_En_Zl2_reloc.o"
-#else
-    include "build/data/overlays/actors/z_en_zl2.reloc.o"
-#endif
 endseg
 
 beginseg
