@@ -3258,7 +3258,7 @@ endseg
 beginseg
     name "ovl_En_Trap"
     include "build/src/overlays/actors/ovl_En_Trap/z_en_trap.o"
-    include "build/data/overlays/actors/z_en_trap.data.o"
+    //include "build/data/overlays/actors/z_en_trap.data.o"
     include "build/data/overlays/actors/z_en_trap.reloc.o"
 endseg
 
